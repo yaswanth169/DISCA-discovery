@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+*.onetoc2
+
+# Data files
+data/real/*.mrc
+data/real_subtomograms/
+data/subtomograms/*.mrc
+
+# Outputs
+outputs/
+checkpoints/
+runs/
+*.pth
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+

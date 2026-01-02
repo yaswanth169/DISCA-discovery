@@ -1,0 +1,102 @@
+# DISCA Configuration
+
+model:
+  input_size: [32, 32, 32]
+  feature_dim: 128
+  activation: "relu"
+  feature_extractor:
+    conv_channels: [32, 64, 128, 256]
+    kernel_sizes: [3, 3, 3, 3]
+    strides: [1, 2, 2, 2]
+    padding: [1, 1, 1, 1]
+    use_batch_norm: true
+    dropout_rate: 0.1
+
+clustering:
+  num_clusters: 10
+  method: "gmm"
+  reassignment_frequency: 1
+  gmm:
+    covariance_type: "diag"
+    max_iter: 100
+    n_init: 10
+    reg_covar: 0.000001
+  kmeans:
+    max_iter: 300
+    n_init: 10
+
+training:
+  batch_size: 32
+  num_epochs: 100
+  warmup_epochs: 3
+  learning_rate: 0.0001
+  optimizer: "adam"
+  gradient_clip: 5.0
+  adam:
+    beta1: 0.9
+    beta2: 0.999
+    weight_decay: 0.0001
+  sgd:
+    momentum: 0.9
+    weight_decay: 0.0001
+    nesterov: true
+  scheduler:
+    enabled: true
+    type: "step"
+    step_size: 30
+    gamma: 0.1
+  early_stopping:
+    enabled: true
+    patience: 20
+    min_delta: 0.0001
+
+yopo:
+  num_propagations: 1
+  gradient_steps: 10
+  loss_weights:
+    clustering_loss: 1.0
+    consistency_loss: 0.05
+    entropy_loss: 0.5
+
+data:
+  data_dir: "data/subtomograms"
+  train_val_split: 0.8
+  num_workers: 4
+  pin_memory: true
+  augmentation:
+    enabled: true
+    rotation_range: [0, 360]
+    flip_axes: [0, 1, 2]
+    gaussian_noise: 0.01
+  normalization:
+    method: "zscore"
+    per_sample: true
+
+evaluation:
+  metrics: ["ari", "nmi", "silhouette", "davies_bouldin"]
+  eval_frequency: 5
+  visualization:
+    enabled: true
+    num_samples: 5
+    save_plots: true
+    output_dir: "outputs/visualizations"
+
+logging:
+  tensorboard: true
+  tensorboard_dir: "runs"
+  level: "INFO"
+  save_frequency: 10
+  checkpoint_dir: "checkpoints"
+  keep_n_checkpoints: 5
+
+computing:
+  device: "auto"
+  seed: 42
+  cuda:
+    mixed_precision: true
+    benchmark: true
+
+experiment:
+  name: "disca_experiment"
+  description: "DISCA training for unsupervised structure discovery"
+  output_dir: "outputs"
