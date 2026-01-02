@@ -151,19 +151,3 @@ Each epoch consists of:
 ## Google Colab
 
 See `COLAB_GUIDE.md` for step-by-step instructions to run on Google Colab with free GPU.
-
-## Citation
-
-If you use this code, please cite:
-
-```bibtex
-@article{disca2023,
-  title={Deep Iterative Subtomogram Clustering and Averaging},
-  journal={PNAS},
-  year={2023}
-}
-```
-
-## License
-
-MIT License
